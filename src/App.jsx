@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { motion } from "framer-motion";
-import { ShoppingCart, ChevronRight, Heart } from "lucide-react";
+import { ShoppingCart, ChevronRight, ChevronLeft, Heart } from "lucide-react";
 
 const MOCK_MOBILES = [
   {
@@ -49,6 +49,8 @@ const MOCK_MOBILES = [
 
 export default function App() {
   const [cart, setCart] = useState([]);
+  const [showLeftButton, setShowLeftButton] = useState(false);
+  const [showRightButton, setShowRightButton] = useState(true);
   const scrollRef = useRef(null);
 
   function addToCart(product) {
@@ -59,9 +61,23 @@ export default function App() {
     });
   }
 
+  function handleScroll() {
+    if (scrollRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+      setShowLeftButton(scrollLeft > 0);
+      setShowRightButton(scrollLeft < scrollWidth - clientWidth - 10);
+    }
+  }
+
   function scrollNext() {
     if (scrollRef.current) {
       scrollRef.current.scrollBy({ left: 320, behavior: "smooth" });
+    }
+  }
+
+  function scrollPrev() {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: -320, behavior: "smooth" });
     }
   }
 
@@ -92,6 +108,7 @@ export default function App() {
           {/* Scrollable container */}
           <div
             ref={scrollRef}
+            onScroll={handleScroll}
             className="flex gap-4 overflow-x-auto scrollbar-hide pb-4"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
@@ -132,14 +149,27 @@ export default function App() {
             ))}
           </div>
 
-          {/* Next button */}
-          <button
-            onClick={scrollNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center hover:bg-gray-50 border border-gray-200"
-            aria-label="Scroll right"
-          >
-            <ChevronRight size={20} className="text-gray-700" />
-          </button>
+          {/* Left button */}
+          {showLeftButton && (
+            <button
+              onClick={scrollPrev}
+              className="absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center hover:bg-gray-50 border border-gray-200 z-10"
+              aria-label="Scroll left"
+            >
+              <ChevronLeft size={20} className="text-gray-700" />
+            </button>
+          )}
+
+          {/* Right button */}
+          {showRightButton && (
+            <button
+              onClick={scrollNext}
+              className="absolute right-0 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center hover:bg-gray-50 border border-gray-200 z-10"
+              aria-label="Scroll right"
+            >
+              <ChevronRight size={20} className="text-gray-700" />
+            </button>
+          )}
         </div>
       </main>
 
