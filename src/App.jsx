@@ -15,7 +15,7 @@ const MOCK_MOBILES = [
     name: "Realme C21Y",
     price: 5599,
     source: "Fliptwirls.com + others",
-    img: "https://m.media-amazon.com/images/I/71yP50Z4KrL._AC_UF894,1000_QL80_.jpg",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu3WpdTJjiHazlv96gU4C3yggmzqlZ1d2tWA&s",
   },
   {
     id: "motorola-g31",
@@ -36,14 +36,14 @@ const MOCK_MOBILES = [
     name: "Samsung Galaxy M13",
     price: 8999,
     source: "flipkart.com + others",
-    img: "https://m.media-amazon.com/images/I/81KS+-vrBWL._AC_UF894,1000_QL80_.jpg",
+    img: "https://m.media-amazon.com/images/I/81kkRZALXQL.jpg",
   },
   {
     id: "poco-m4",
     name: "POCO M4 Pro",
     price: 12999,
     source: "amazon.in + others",
-    img: "https://m.media-amazon.com/images/I/71dQzKo3XiL._AC_UF894,1000_QL80_.jpg",
+    img: "https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-poco-m4-pro-1.jpg",
   },
 ];
 
